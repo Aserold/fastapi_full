@@ -1,11 +1,14 @@
 import datetime
-from typing import Annotated
 from fastapi_users.db import SQLAlchemyBaseUserTable
 from sqlalchemy import String, Integer, TIMESTAMP, ForeignKey, JSON, Boolean
-from sqlalchemy.orm import Mapped, mapped_column
-from src.database import Base
+from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
+from src.database import intpk
 
-intpk = Annotated[int, mapped_column(primary_key=True)]
+
+class Base(DeclarativeBase):
+    pass
+
+
 metadata = Base.metadata
 
 
