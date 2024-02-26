@@ -1,4 +1,8 @@
+import time
+
 from fastapi import APIRouter, Depends
+
+from fastapi_cache.decorator import cache
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, insert
@@ -11,6 +15,13 @@ router = APIRouter(
     prefix='/operations',
     tags=['Operation'],
 )
+
+
+@router.get('/longahhop')
+@cache(expire=30)
+def get_long():
+    time.sleep(3)
+    return 'That was a long ahh operation'
 
 
 @router.get('/')
